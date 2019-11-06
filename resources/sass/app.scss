@@ -17,7 +17,8 @@ footer {
     color: #777;
     font-size: 13px;
     font-weight: bold;
-  
+    position:absolute;
+    height:50px; 
     a {
       color: #555;
     }
@@ -33,4 +34,5 @@ footer {
       width: 17px;
       height: 17px;
     }
-  }
+
+}
