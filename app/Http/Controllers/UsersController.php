@@ -22,14 +22,16 @@ class UsersController extends Controller
     public function store(CreateUserRequest $request)
     {
 
-        User::create([
+        $user = User::create([
             'name' =>$request->name,
             'email'=>$request->email,
             'password'=>bcrypt($request->password),
 
         ]);
-
-        return;
+        
+        session()->flash('success','欢迎，您将在这里开启一段新的旅程~');
+        // return redirect()->route('users.show', [$user]); 等同$user->id
+        return redirect()->route('users.show', $user->id);
 
     }
 
