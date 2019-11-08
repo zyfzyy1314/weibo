@@ -25,9 +25,11 @@ class SessionsController extends Controller
     */
     public function store(SessionUserRequest $request)
     {
+      # return  $request->remember;
+
         $req_data =  ['email' => $request->email, 'password' => $request->password];
 
-        if (Auth::attempt($req_data )) {
+        if (Auth::attempt($req_data,$request->has('remember'))) {
             session()->flash('success', '欢迎回来！');
             return redirect()->route('users.show', [Auth::user()]);
         } else {
