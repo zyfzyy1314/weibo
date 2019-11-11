@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use App\Statues;
 use Illuminate\Http\Request;
 
@@ -12,6 +12,13 @@ class StatuesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index()
     {
         //
@@ -35,7 +42,15 @@ class StatuesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Auth::user()->statuses()->create([
+            'content'=>$request->content,
+            //'user_id'=>Auth::user()->id,
+            // 'user_id' =>$request->user()->id   
+        ]);
+        
+        session()->flash('success','发布成功');
+        return  redirect()->back();
+
     }
 
     /**
