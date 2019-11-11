@@ -54,4 +54,9 @@ class User extends Authenticatable
             $user->activation_token = Str::random(30);
         });
     }
+
+    public function statuses()
+    {
+        return $this->hasMany('App\Statues');
+    }
 }
