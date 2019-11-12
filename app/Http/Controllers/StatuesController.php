@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Auth;
 use App\Statues;
+use App\User;
 use Illuminate\Http\Request;
 
 class StatuesController extends Controller
@@ -93,8 +94,15 @@ class StatuesController extends Controller
      * @param  \App\Statues  $statues
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Statues $statues)
+
+    public function destroy(Statues $statue)
     {
-        //
+        $this->authorize('destroy', $statue);
+        $statue ->delete();
+        session()->flash('success', '微博已被成功删除！');
+        return redirect()->back();
     }
+
+
+        
 }
